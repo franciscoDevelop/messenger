@@ -25,7 +25,7 @@
 
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-        <b-navbar-brand href="#">Kain Messenger</b-navbar-brand>
+        <b-navbar-brand href="#">{{ config('app.name', 'Laravel') }}</b-navbar-brand>
 
         <b-collapse is-nav id="nav_collapse">
             <!-- Right aligned nav items -->
@@ -37,15 +37,16 @@
                     <b-nav-item href="{{ route('register') }}">{{ __('Register') }}</b-nav-item>
                   @endif
                 @else
+                  <b-nav-item-dropdown right>
                     <template slot="button-content">
-                      <em>{{ Auth::user()->name }}</em>
+                      {{ Auth::user()->name }}
                     </template>
-                    <b-dropdown-item href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">{{ __('Logout') }}</b-dropdown-item>
+                    <b-dropdown-item href="#"
+                    @click="logout">{{ __('Logout') }}</b-dropdown-item>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
+                  </b-nav-item-dropdown>
                 @endguest
               </b-navbar-nav>
             </b-navbar-nav>
